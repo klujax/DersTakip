@@ -1,0 +1,17 @@
+{
+  "name": "Eylül'ün Ders Takibi",
+  "short_name": "Ders Takip",
+  "description": "Premium Ders ve Devamsızlık Takip Uygulaması",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fdf2f8",
+  "theme_color": "#ec4899",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

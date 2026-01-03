@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ders devamsızlık takibi, not alma ve profil yönetimi">
+    <title>Eylül'ün Ders Takibi</title>
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ec4899">
+    <link rel="apple-touch-icon" href="icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+        }
+    </script>
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <h2>Enes 💖 Eylül</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-section="home">
+                    <span class="nav-icon">✨</span>
+                    <span>Anasayfa</span>
+                </button>
+                <button class="nav-item" data-section="devamsizlik">
+                    <span class="nav-icon">📊</span>
+                    <span>Devamsızlık</span>
+                </button>
+                <button class="nav-item" data-section="notlar">
+                    <span class="nav-icon">📓</span>
+                    <span>Notlarım</span>
+                </button>
+                <button class="nav-item" data-section="dersprogrami">
+                    <span class="nav-icon">📅</span>
+                    <span>Ders Programı</span>
+                </button>
+                <button class="nav-item" data-section="haftalikplan">
+                    <span class="nav-icon">📋</span>
+                    <span>Haftalık Plan</span>
+                </button>
+                <button class="nav-item" data-section="profil">
+                    <span class="nav-icon">💎</span>
+                    <span>Profilim</span>
+                </button>
+                <button class="nav-item" data-section="copkovasi">
+                    <span class="nav-icon">🗑️</span>
+                    <span>Çöp Kovası</span>
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2026 Ders Takip</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-wrapper">
+            <!-- Header -->
+            <header class="top-bar">
+                <div class="welcome-text">
+                    <h1 id="pageTitle">Anasayfa Özet</h1>
+                    <p id="currentDate"></p>
+                </div>
+                <div class="user-info-brief" onclick="navigateTo('profil')" style="cursor:pointer">
+                    <img id="headerAvatar" src="" alt="Profil" class="header-avatar">
+                </div>
+            </header>
+
+            <div class="content-area">
+                <!-- Section: Home (Dashboard) -->
+                <section id="home-section" class="app-section active">
+                    <div class="home-grid">
+                        <!-- Stats Grid -->
+                        <div class="stats-container">
+                            <div class="stat-card">
+                                <div class="stat-icon-wrapper pink">📖</div>
+                                <div class="stat-content">
+                                    <h3 id="statTotalLessons">0</h3>
+                                    <p>Toplam Ders</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon-wrapper emerald">🛡️</div>
+                                <div class="stat-content">
+                                    <h3 id="statTotalAbsence">0</h3>
+                                    <p>Devamsızlık</p>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon-wrapper orange">🖇️</div>
+                                <div class="stat-content">
+                                    <h3 id="statTotalNotes">0</h3>
+                                    <p>Notlar</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Today's Plan (Big Focus) -->
+                        <div class="today-focus-card">
+                            <h2>✨ Bugünün Odak Noktası</h2>
+                            <div id="homeTodayPlan" class="focus-content">
+                                <!-- Bugünün planı buraya gelecek -->
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Summary & Activity -->
+                        <div class="dashboard-summ-grid">
+                            <div class="dashboard-card">
+                                <h3>📊 Son Durum</h3>
+                                <div id="quickSummary" class="summary-list"
+                                    style="display:flex; flex-direction:column; gap:12px">
+                                    <!-- Özet bilgiler -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Full Width Schedule View -->
+                        <div class="home-schedule-card">
+                            <div
+                                style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px">
+                                <h3
+                                    style="font-family:'Outfit', sans-serif; font-size:1.3rem; font-weight:800; color:var(--text-head)">
+                                    📅 Ders Programım</h3>
+                                <div style="font-size:0.85rem; color:var(--text-dim); font-weight:600">Bu Haftalık Akış
+                                </div>
+                            </div>
+                            <div id="homeScheduleView" class="home-schedule-grid">
+                                <!-- Ders programı buraya yüklenecek -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Attendance (Existing) -->
+                <section id="devamsizlik-section" class="app-section">
+                    <div class="section-controls">
+                        <h2>Ders Devamsızlık Takibi</h2>
+                        <button class="add-btn" id="addLessonBtn"><span>+</span> Ders Ekle</button>
+                    </div>
+                    <div class="lessons-grid" id="lessonsGrid"></div>
+                </section>
+
+                <!-- Section: Notes (Existing) -->
+                <section id="notlar-section" class="app-section">
+                    <div class="notes-header" style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2>📓 Ders Notları</h2>
+                        <button class="add-btn" id="addNoteBtn"><span>+</span> Not Ekle</button>
+                    </div>
+
+                    <!-- Normal Notlar -->
+                    <div class="notes-grid" id="notesGrid"></div>
+                </section>
+
+                <!-- Section: Ders Programı -->
+                <section id="dersprogrami-section" class="app-section">
+                    <div class="section-controls">
+                        <h2>📅 Ders Programı</h2>
+                    </div>
+
+                    <!-- Fotoğraf Yükleme -->
+                    <div class="schedule-upload-area">
+                        <div class="upload-box" id="uploadBox">
+                            <input type="file" id="scheduleFile" accept="image/*,.pdf" style="display:none">
+                            <div class="upload-content" onclick="document.getElementById('scheduleFile').click()">
+                                <span style="font-size:3.5rem; display:block; margin-bottom:15px">📸</span>
+                                <h3 style="color:var(--brand-primary); margin-bottom:10px">Program Fotoğrafı Yükle</h3>
+                                <p style="color:var(--text-dim)">Veya manuel giriş yapmak için aşağı kaydırın</p>
+                            </div>
+                        </div>
+                        <div id="schedulePreview" class="schedule-preview"></div>
+                    </div>
+
+                    <!-- Manuel Çetele -->
+                    <div class="manual-schedule">
+                        <h3 style="margin: 30px 0 20px; font-family:'Outfit', sans-serif; color:var(--text-head)">📝
+                            Veya Manuel Giriş</h3>
+                        <div class="schedule-grid" id="scheduleTable">
+                            <div class="schedule-day">
+                                <div class="day-header">Pazartesi</div>
+                                <textarea class="day-input" data-day="pazartesi"
+                                    placeholder="09:00 - Matematik&#10;10:00 - Fizik..."></textarea>
+                            </div>
+                            <div class="schedule-day">
+                                <div class="day-header">Salı</div>
+                                <textarea class="day-input" data-day="sali" placeholder="Dersleri girin..."></textarea>
+                            </div>
+                            <div class="schedule-day">
+                                <div class="day-header">Çarşamba</div>
+                                <textarea class="day-input" data-day="carsamba"
+                                    placeholder="Dersleri girin..."></textarea>
+                            </div>
+                            <div class="schedule-day">
+                                <div class="day-header">Perşembe</div>
+                                <textarea class="day-input" data-day="persembe"
+                                    placeholder="Dersleri girin..."></textarea>
+                            </div>
+                            <div class="schedule-day">
+                                <div class="day-header">Cuma</div>
+                                <textarea class="day-input" data-day="cuma" placeholder="Dersleri girin..."></textarea>
+                            </div>
+                        </div>
+                        <button class="add-btn" id="saveScheduleBtn"
+                            style="margin-top:20px; background:var(--brand-accent)">💾 Programı Kaydet</button>
+                    </div>
+                </section>
+
+                <!-- Section: Haftalık Plan -->
+                <section id="haftalikplan-section" class="app-section">
+                    <div class="section-controls">
+                        <h2>📋 Haftalık Plan & Görevler</h2>
+                    </div>
+                    <p style="margin-bottom:20px; color:var(--text-muted)">Her gün için görev ekle, tamamladıkça tik at!
+                    </p>
+
+                    <!-- Görev Ekleme -->
+                    <div class="task-add-form" style="margin-bottom:30px">
+                        <div class="profile-details-grid"
+                            style="grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: flex-end;">
+                            <div>
+                                <label
+                                    style="display:block; margin-bottom:8px; font-weight:700; font-family:'Outfit',sans-serif; color:var(--text-head)">Görev
+                                    Adı</label>
+                                <input type="text" id="newTaskText" placeholder="Örn: Analiz dersine çalış..."
+                                    style="margin-bottom:0">
+                            </div>
+                            <div>
+                                <label
+                                    style="display:block; margin-bottom:8px; font-weight:700; font-family:'Outfit',sans-serif; color:var(--text-head)">Gün</label>
+                                <select id="newTaskDay" style="margin-bottom:0">
+                                    <option value="pazartesi">Pazartesi</option>
+                                    <option value="sali">Salı</option>
+                                    <option value="carsamba">Çarşamba</option>
+                                    <option value="persembe">Perşembe</option>
+                                    <option value="cuma">Cuma</option>
+                                    <option value="cumartesi">Cumartesi</option>
+                                    <option value="pazar">Pazar</option>
+                                </select>
+                            </div>
+                            <button class="add-btn" id="addTaskBtn" style="padding:16px 30px">➕ Görev Ekle</button>
+                        </div>
+                    </div>
+
+                    <!-- Günlük Görev Listesi -->
+                    <div class="weekly-tasks-grid" id="weeklyTasksGrid">
+                        <!-- Görevler JavaScript ile doldurulacak -->
+                    </div>
+                </section>
+                <section id="profil-section" class="app-section">
+                    <div class="profile-container">
+                        <!-- Profile Header Card -->
+                        <div class="profile-header-card">
+                            <div class="profile-avatar-large" id="profileAvatarDisplay"
+                                style="position:relative; cursor:pointer"
+                                onclick="document.getElementById('profilePhotoInput').click()">
+                                <img id="profilePhoto" src="" alt="Profil Fotoğrafı"
+                                    style="width:100%; height:100%; object-fit:cover; border-radius:40px; display:none">
+                                <span id="profileInitials">👤</span>
+                                <input type="file" id="profilePhotoInput" accept="image/*" style="display:none"
+                                    onchange="handleProfilePhoto(event)">
+                                <div
+                                    style="position:absolute; bottom:-5px; right:-5px; background:var(--brand-primary); width:36px; height:36px; border-radius:50%; display:flex; align-items:center; justify-content:center; border:3px solid white">
+                                    📷</div>
+                            </div>
+                            <div class="profile-info-large">
+                                <h2 id="profileName">Öğrenci İsmi</h2>
+                                <p id="profileSchool">Okul / Bölüm</p>
+                            </div>
+                        </div>
+
+                        <!-- Profile Edit Form -->
+                        <div class="profile-details-grid">
+                            <div class="detail-card">
+                                <h3>📝 Kişisel Bilgiler</h3>
+                                <div class="form-group" style="margin-bottom:20px">
+                                    <label
+                                        style="display:block; margin-bottom:8px; font-weight:700; color:var(--text-head)">Ad
+                                        Soyad</label>
+                                    <input type="text" id="editName" placeholder="Ad Soyad">
+                                </div>
+                                <div class="form-group" style="margin-bottom:20px">
+                                    <label
+                                        style="display:block; margin-bottom:8px; font-weight:700; color:var(--text-head)">Okul
+                                        / Üniversite</label>
+                                    <input type="text" id="editSchool" placeholder="Okul Adı">
+                                </div>
+                                <div class="form-group" style="margin-bottom:20px">
+                                    <label
+                                        style="display:block; margin-bottom:8px; font-weight:700; color:var(--text-head)">Bölüm
+                                        / Alan</label>
+                                    <input type="text" id="editDepartment" placeholder="Bölüm / Alan">
+                                </div>
+                                <div class="form-group" style="margin-bottom:20px">
+                                    <label
+                                        style="display:block; margin-bottom:8px; font-weight:700; color:var(--text-head)">Sınıf</label>
+                                    <select id="editGrade">
+                                        <option value="Hazırlık">Hazırlık</option>
+                                        <option value="1. Sınıf">1. Sınıf</option>
+                                        <option value="2. Sınıf">2. Sınıf</option>
+                                        <option value="3. Sınıf">3. Sınıf</option>
+                                        <option value="4. Sınıf">4. Sınıf</option>
+                                        <option value="Yüksek Lisans">Yüksek Lisans</option>
+                                        <option value="Doktora">Doktora</option>
+                                    </select>
+                                </div>
+                                <button class="add-btn" onclick="saveProfile()"
+                                    style="width:100%; justify-content:center">💾 Bilgileri Kaydet</button>
+                            </div>
+                            <div class="detail-card">
+                                <h3>📊 İstatistikler</h3>
+                                <div class="info-row"><span>Kayıtlı Ders:</span> <strong id="p-lessons">0</strong></div>
+                                <div class="info-row"><span>Toplam Devamsızlık:</span> <strong id="p-absence">0
+                                        Saat</strong></div>
+                                <div class="info-row"><span>Kritik Ders:</span> <strong id="p-critical">0</strong></div>
+                                <div class="info-row"><span>Kayıtlı Not:</span> <strong id="p-notes">0</strong></div>
+                                <div class="info-row" style="margin-top:20px"><span>Durum:</span> <span
+                                        class="status-badge safe">Aktif Öğrenci</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Trash -->
+                <section id="copkovasi-section" class="app-section">
+                    <div class="notes-header"
+                        style="margin-bottom:30px; display:flex; justify-content:space-between; align-items:center;">
+                        <h2>🗑️ Çöp Kovası</h2>
+                        <button class="add-btn" id="emptyTrashBtn" style="background:var(--brand-primary)">
+                            🗑️ Çöpü Temizle
+                        </button>
+                    </div>
+                    <div class="trash-grid" id="trashGrid">
+                        <!-- Silinenler buraya -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals (Ders Ekleme ve Not Ekleme modalları aynı kalacak ama CSS'de sidebar'a göre ayarlanacak) -->
+    <div class="modal-overlay" id="lessonModal">
+        <div class="modal modal-lg">
+            <div class="modal-header">
+                <h3>Yeni Ders Ekle</h3>
+                <button class="close-btn" id="closeLessonModal">&times;</button>
+            </div>
+            <form id="lessonForm">
+                <div class="form-group">
+                    <label for="lessonName">Ders Adı</label>
+                    <input type="text" id="lessonName" placeholder="Örn: Teknik Resim" required>
+                </div>
+                <div class="form-group toggle-group">
+                    <div class="toggle-row">
+                        <span class="toggle-text">Alt dersler var mı?</span>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="hasSubLessons">
+                            <span class="toggle-switch"></span>
+                        </label>
+                    </div>
+                    <p class="toggle-hint">Uygulama/Konu ayrımı için açın</p>
+                </div>
+                <div id="singleLessonFields">
+                    <div class="form-group">
+                        <label for="totalHours">Toplam Ders Saati</label>
+                        <input type="number" id="totalHours" placeholder="Örn: 56" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="absenceRate">Devamsızlık Hakkı (%)</label>
+                        <input type="number" id="absenceRate" placeholder="Örn: 30" min="1" max="100">
+                    </div>
+                </div>
+                <div id="subLessonsFields" style="display: none;">
+                    <div class="sub-lessons-container" id="subLessonsContainer"></div>
+                    <button type="button" class="add-sub-btn" id="addSubLessonBtn"><span>+</span> Alt Ders Ekle</button>
+                </div>
+                <button type="submit" class="submit-btn">Dersi Ekle</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="noteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Yeni Not Ekle</h3>
+                <button class="close-btn" id="closeNoteModal">&times;</button>
+            </div>
+            <form id="noteForm">
+                <div class="form-group">
+                    <label for="noteTitle">Not Başlığı</label>
+                    <input type="text" id="noteTitle" placeholder="Örn: Sınav tarihleri" required>
+                </div>
+                <div class="form-group">
+                    <label for="noteContent">Not İçeriği</label>
+                    <textarea id="noteContent" rows="5" placeholder="Notunuzu buraya yazın..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Renk Seçin</label>
+                    <div class="color-picker">
+                        <input type="radio" name="noteColor" value="emerald" id="colorEmerald" checked>
+                        <label for="colorEmerald" class="color-option green"></label>
+                        <input type="radio" name="noteColor" value="pink" id="colorPink">
+                        <label for="colorPink" class="color-option pink"></label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Notu Kaydet</button>
+            </form>
+        </div>
+    </div>
+    <!-- Welcome Setup Modal -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="modal">
+            <div style="text-align:center; margin-bottom:30px">
+                <span style="font-size:4rem">🎓</span>
+                <h2 style="font-family:'Outfit',sans-serif; color:var(--text-head); margin-top:15px">Hoş Geldin!</h2>
+                <p style="color:var(--text-dim)">Seni tanıyalım</p>
+            </div>
+            <form id="welcomeForm">
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:8px; font-weight:700">Adın Soyadın</label>
+                    <input type="text" id="welcomeName" placeholder="Örn: Eylül Yılmaz" required>
+                </div>
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:8px; font-weight:700">Okulun</label>
+                    <input type="text" id="welcomeSchool" placeholder="Örn: İstanbul Üniversitesi" required>
+                </div>
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:8px; font-weight:700">Bölümün</label>
+                    <input type="text" id="welcomeDepartment" placeholder="Örn: Bilgisayar Mühendisliği">
+                </div>
+                <div class="form-group">
+                    <label style="display:block; margin-bottom:8px; font-weight:700">Sınıfın</label>
+                    <select id="welcomeGrade">
+                        <option value="1. Sınıf">1. Sınıf</option>
+                        <option value="2. Sınıf">2. Sınıf</option>
+                        <option value="3. Sınıf" selected>3. Sınıf</option>
+                        <option value="4. Sınıf">4. Sınıf</option>
+                        <option value="Yüksek Lisans">Yüksek Lisans</option>
+                    </select>
+                </div>
+                <button type="submit" class="add-btn" style="width:100%; justify-content:center; margin-top:10px">🚀
+                    Başlayalım!</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
