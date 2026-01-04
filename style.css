@@ -1469,23 +1469,9 @@ input:checked+.toggle-switch:before {
 
 /* ========== MOBİL UYUMLULUK ========== */
 
-/* Hamburger Menu Button */
-.mobile-menu-btn {
+/* Mobile Menu Toggle - Header'da */
+.mobile-menu-toggle {
     display: none;
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    background: white;
-    border: none;
-    border-radius: 20px;
-    color: var(--brand-primary);
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 1100;
-    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
-    transition: all 0.3s ease;
 }
 
 /* Tablet */
@@ -1573,9 +1559,7 @@ input:checked+.toggle-switch:before {
 
     /* Overlay */
     .sidebar-overlay {
-        display: block;
-        visibility: hidden;
-        opacity: 0;
+        display: none;
         position: fixed;
         top: 0;
         left: 0;
@@ -1588,8 +1572,7 @@ input:checked+.toggle-switch:before {
     }
 
     .sidebar-overlay.active {
-        visibility: visible;
-        opacity: 1;
+        display: block;
     }
 
     /* Mobile Menu Button - Modern Card Style */
@@ -1616,127 +1599,229 @@ input:checked+.toggle-switch:before {
         flex-direction: column;
     }
 
+    /* Mobile Header - 3 Section Layout */
     .top-bar {
-        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 20px;
         height: auto;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(20px);
         position: sticky;
         top: 0;
         z-index: 50;
         border-bottom: 1px solid rgba(236, 72, 153, 0.1);
+        gap: 12px;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: white;
+        border: none;
+        color: var(--brand-primary);
+        font-size: 1.8rem;
+        cursor: pointer;
+        flex-shrink: 0;
+        padding: 0;
+        margin: 0;
+        z-index: 9999;
+        position: relative;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu-toggle:active {
+        transform: scale(0.95);
+        box-shadow: 0 2px 8px rgba(236, 72, 153, 0.2);
+    }
+
+    .mobile-menu-btn {
+        display: none !important;
+    }
+
+    .welcome-text {
+        flex: 1;
+        text-align: center;
     }
 
     .top-bar h1 {
-        font-size: 1.3rem;
+        font-size: 1rem;
         font-weight: 800;
+        margin: 0;
+    }
+
+    .user-info-brief {
+        flex-shrink: 0;
+    }
+
+    .header-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 2.5px solid var(--brand-primary);
     }
 
     .content-area {
-        padding: 20px;
-        padding-bottom: 100px;
+        padding: 16px;
+        padding-bottom: 30px;
         overflow-y: auto;
     }
 
-    /* Grid Düzeltmeleri - Touch Friendly */
-    .stats-container,
-    .home-schedule-grid,
-    .lessons-grid,
-    .notes-grid,
-    .trash-grid,
-    .weekly-tasks-grid,
-    .profile-details-grid {
-        grid-template-columns: 1fr !important;
-        gap: 18px;
+    /* Stats - Ultra Compact 3 Column Grid */
+    .stats-container {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 10px !important;
+        margin-bottom: 20px;
     }
 
     .stat-card {
-        padding: 24px;
-        border-radius: 24px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 8px;
+        border-radius: 18px;
+        gap: 8px;
+        text-align: center;
     }
 
     .stat-icon-wrapper {
-        width: 55px;
-        height: 55px;
-        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        margin: 0;
+    }
+
+    .stat-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
     }
 
     .stat-content h3 {
-        font-size: 2rem;
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+    .stat-content p {
+        font-size: 0.7rem;
+        margin: 0;
     }
 
     /* Focus Card */
     .today-focus-card {
-        padding: 28px;
+        padding: 22px;
         min-height: auto;
-        border-radius: 28px;
+        border-radius: 24px;
     }
 
     .today-focus-card h2 {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
 
-    /* Cards - Larger Touch Targets */
+    /* Cards - Compact Mobile Design */
     .home-schedule-card,
     .dashboard-card,
     .lesson-card,
     .note-card,
     .detail-card {
-        padding: 24px;
-        border-radius: 24px;
+        padding: 16px;
+        border-radius: 18px;
         transition: all 0.3s ease;
     }
 
+    /* Grid Layout - Single Column */
+    .lessons-grid,
+    .notes-grid,
+    .trash-grid,
+    .schedule-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px;
+    }
+
+    .profile-details-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px;
+    }
+
     .home-day-pill {
-        padding: 18px;
-        border-radius: 18px;
+        padding: 12px 10px;
+        border-radius: 14px;
+    }
+
+    .home-day-pill h4 {
+        font-size: 0.72rem;
+        margin-bottom: 6px;
+    }
+
+    .home-day-pill p {
+        font-size: 0.75rem;
+        line-height: 1.3;
+    }
+
+    .home-schedule-grid {
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 8px;
     }
 
     /* Profile */
     .profile-header-card {
         flex-direction: column;
         text-align: center;
-        padding: 35px 25px;
-        border-radius: 28px;
-        gap: 25px;
+        padding: 24px 16px;
+        border-radius: 20px;
+        gap: 16px;
     }
 
     .profile-avatar-large {
-        width: 110px;
-        height: 110px;
+        width: 80px;
+        height: 80px;
+        border-radius: 24px;
+        font-size: 2.5rem;
     }
 
     .profile-info-large h2 {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
+    }
+
+    .profile-info-large p {
+        font-size: 0.85rem;
     }
 
     /* Buttons - Touch Friendly */
     .add-btn {
-        padding: 16px 24px;
-        font-size: 1rem;
-        min-height: 50px;
-        border-radius: 18px;
+        padding: 14px 20px;
+        font-size: 0.95rem;
+        min-height: 48px;
+        border-radius: 16px;
     }
 
     .counter button {
-        width: 42px;
-        height: 42px;
-        font-size: 1.3rem;
-    }
-
-    .task-delete,
-    .lesson-card .task-delete,
-    .note-card .task-delete {
         width: 38px;
         height: 38px;
         font-size: 1.2rem;
     }
 
+    .task-delete,
+    .lesson-card .task-delete,
+    .note-card .task-delete {
+        width: 34px;
+        height: 34px;
+        font-size: 1.1rem;
+    }
+
     /* Modal - Full Screen on Mobile */
     .modal {
         margin: 0;
-        padding: 35px 25px;
-        border-radius: 30px 30px 0 0;
+        padding: 30px 20px;
+        border-radius: 28px 28px 0 0;
         max-height: 90vh;
         overflow-y: auto;
         position: fixed;
@@ -1753,33 +1838,107 @@ input:checked+.toggle-switch:before {
     input,
     textarea,
     select {
-        padding: 16px;
+        padding: 14px;
         font-size: 16px;
-        border-radius: 16px;
+        border-radius: 14px;
     }
 
     /* Header Avatar */
     .header-avatar {
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
     }
 
     /* Task Items - Larger Touch Area */
     .task-item {
-        padding: 16px;
-        min-height: 60px;
+        padding: 14px;
+        min-height: 56px;
     }
 
     .day-task-card {
-        border-radius: 24px;
+        border-radius: 18px;
+        padding: 14px;
+    }
+
+    .day-task-header {
+        font-size: 0.95rem;
+        padding-bottom: 10px;
+    }
+
+    .task-count {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+
+    /* Lesson & Note Headers */
+    .lesson-header h3,
+    .note-header h4 {
+        font-size: 1.05rem;
+        padding-right: 40px;
+    }
+
+    /* Widget Card */
+    .widget-card {
         padding: 20px;
+        border-radius: 24px;
+    }
+
+    .widget-header h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Section Controls */
+    .section-controls {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch !important;
+        margin-bottom: 16px;
+    }
+
+    .section-controls h2 {
+        font-size: 1.3rem;
+        text-align: center;
+    }
+
+    .section-controls .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Attendance Item */
+    .attendance-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 14px;
+        background: #f9fafb;
+        border-radius: 14px;
+        margin-bottom: 10px;
+    }
+
+    .attendance-item span {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--text-head);
+    }
+
+    /* Compact Info Rows */
+    .info-row {
+        padding: 10px 0;
+        font-size: 0.9rem;
+    }
+
+    /* Summary Item */
+    .summary-item {
+        padding: 14px 16px;
+        font-size: 0.9rem;
     }
 }
 
 /* Küçük Telefonlar */
 @media (max-width: 400px) {
     .stat-content h3 {
-        font-size: 1.7rem;
+        font-size: 1.5rem;
     }
 
     .top-bar h1 {
@@ -1791,13 +1950,143 @@ input:checked+.toggle-switch:before {
     }
 
     .mobile-menu-btn {
-        width: 55px;
-        height: 55px;
-        bottom: 20px;
-        right: 20px;
+        width: 48px;
+        height: 48px;
+        top: 16px;
+        right: 16px;
+        font-size: 1.2rem;
     }
 
     .content-area {
-        padding: 15px;
+        padding: 12px;
     }
+
+    .stat-card {
+        padding: 16px;
+    }
+
+    .today-focus-card {
+        padding: 18px;
+    }
+}
+
+/* Additional Desktop Styles */
+/* Section Controls */
+.section-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-controls h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-head);
+}
+
+/* Attendance Item */
+.attendance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px;
+    background: #fdf2f8;
+    border-radius: 18px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.attendance-item:hover {
+    background: #fce7f3;
+}
+
+.attendance-item span {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-head);
+}
+
+/* Info Row */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 0.95rem;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-row span {
+    color: var(--text-dim);
+}
+
+.info-row strong {
+    color: var(--text-head);
+    font-weight: 700;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.status-badge.safe {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-badge.danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Profile Details Grid */
+.profile-details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.detail-card {
+    background: white;
+    padding: 30px;
+    border-radius: 32px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.detail-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-head);
+    margin-bottom: 20px;
+}
+
+/* Notes Header */
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.notes-header h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--text-head);
 }

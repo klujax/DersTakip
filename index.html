@@ -28,7 +28,6 @@
         }
     </script>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
     <div class="dashboard-layout">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
@@ -67,9 +66,16 @@
         <main class="main-wrapper">
             <!-- Header -->
             <header class="top-bar">
+                <button class="mobile-menu-toggle" id="mobileMenuBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
                 <div class="welcome-text">
-                    <h1 id="pageTitle">Anasayfa Özet</h1>
-                    <p id="currentDate"></p>
+                    <h1 id="pageTitle">Anasayfa</h1>
                 </div>
                 <div class="user-info-brief" onclick="navigateTo('profil')" style="cursor:pointer">
                     <img id="headerAvatar" src="" alt="Profil" class="header-avatar">
@@ -83,21 +89,21 @@
                         <!-- Stats Grid -->
                         <div class="stats-container">
                             <div class="stat-card">
-                                <div class="stat-icon-wrapper pink">📖</div>
+                                <div class="stat-icon-wrapper pink"></div>
                                 <div class="stat-content">
                                     <h3 id="statTotalLessons">0</h3>
                                     <p>Toplam Ders</p>
                                 </div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-icon-wrapper emerald">🛡️</div>
+                                <div class="stat-icon-wrapper emerald"></div>
                                 <div class="stat-content">
                                     <h3 id="statTotalAbsence">0</h3>
                                     <p>Devamsızlık</p>
                                 </div>
                             </div>
                             <div class="stat-card">
-                                <div class="stat-icon-wrapper orange">🖇️</div>
+                                <div class="stat-icon-wrapper purple"></div>
                                 <div class="stat-content">
                                     <h3 id="statTotalNotes">0</h3>
                                     <p>Notlar</p>
