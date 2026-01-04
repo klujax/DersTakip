@@ -45,89 +45,132 @@ body {
     gap: 20px;
 }
 
-/* Sidebar Platinum Design */
+/* Sidebar Platinum Elite Design */
 .sidebar {
     width: var(--sidebar-width);
-    background: rgba(252, 231, 243, 0.7);
-    backdrop-filter: blur(20px);
-    border-radius: var(--border-radius);
-    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
     display: flex;
     flex-direction: column;
-    padding: 40px 20px;
-    box-shadow: var(--glass-shadow);
+    padding: 60px 0;
     transition: var(--transition-smooth);
     z-index: 100;
+    position: relative;
+}
+
+.sidebar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(236, 72, 153, 0.2), transparent);
 }
 
 .sidebar-logo {
-    padding: 0 10px;
-    margin-bottom: 50px;
+    padding: 0 45px;
+    margin-bottom: 70px;
+    position: relative;
 }
 
 .sidebar-logo h2 {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 800;
-    background: linear-gradient(135deg, var(--brand-primary), #4f46e5);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -1px;
+    color: var(--text-head);
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    line-height: 0.9;
+}
+
+.sidebar-logo h2 span {
+    font-size: 0.8rem;
+    color: var(--brand-primary);
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+.sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 10px;
 }
 
 .nav-item {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 18px 22px;
+    padding: 18px 25px;
     border: none;
     background: transparent;
     border-radius: 20px;
-    color: var(--text-head);
-    font-size: 1rem;
-    font-weight: 700;
+    color: var(--text-body);
+    font-size: 0.95rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: var(--transition-smooth);
-    margin-bottom: 12px;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    width: 100%;
     position: relative;
-    overflow: hidden;
+    letter-spacing: 0.5px;
 }
 
 .nav-item::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 6px;
-    height: 0;
-    background: var(--brand-primary);
-    transition: var(--transition-smooth);
-    border-radius: 0 4px 4px 0;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), transparent);
+    border-radius: 20px;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.4s ease;
+    z-index: -1;
 }
 
 .nav-item:hover {
-    background: rgba(236, 72, 153, 0.08);
+    color: var(--brand-primary);
     transform: translateX(8px);
 }
 
-.nav-item:hover .nav-icon {
-    transform: scale(1.2) rotate(10deg);
+.nav-item:hover::before {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .nav-item.active {
-    background: linear-gradient(135deg, var(--brand-primary), #db2777);
-    color: white;
-    box-shadow: 0 12px 24px rgba(236, 72, 153, 0.25);
+    background: white;
+    color: var(--brand-primary);
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.15);
+    font-weight: 800;
 }
 
-.nav-item.active::before {
-    height: 100%;
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    right: 15px;
+    width: 6px;
+    height: 6px;
+    background: var(--brand-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--brand-primary);
 }
 
-.nav-icon {
-    font-size: 1.3rem;
-    transition: var(--transition-smooth);
+.sidebar-footer {
+    padding: 40px;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-weight: 800;
+    opacity: 0.5;
+    text-align: center;
 }
 
 
@@ -606,20 +649,29 @@ body {
     color: var(--text-head);
 }
 
-.task-delete {
-    background: none;
-    border: none;
+.task-item .task-delete {
+    width: 28px;
+    height: 28px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 2px solid rgba(239, 68, 68, 0.15);
+    border-radius: 8px;
+    color: #ef4444;
+    font-size: 1rem;
     cursor: pointer;
-    font-size: 1.1rem;
-    opacity: 0.4;
-    transition: 0.2s;
-    padding: 5px;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
-.task-delete:hover {
-    opacity: 1;
-    transform: scale(1.1);
+.task-item .task-delete:hover {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+    transform: rotate(90deg) scale(1.15);
 }
+
 
 
 /* Lesson Card */
@@ -630,11 +682,34 @@ body {
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     transition: var(--transition-smooth);
+    position: relative;
 }
 
 .lesson-card:hover {
     transform: translateY(-8px);
     border-color: var(--brand-accent);
+}
+
+.lesson-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.lesson-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.3rem;
+    color: var(--text-head);
+    flex: 1;
+    padding-right: 45px;
+}
+
+.lesson-card .task-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 /* Note Card */
@@ -832,6 +907,114 @@ td:last-child {
     }
 }
 
+/* Counter - Ultra Premium Design */
+.counter {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.counter button {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+    color: var(--brand-primary);
+    font-size: 1.2rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(236, 72, 153, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.counter button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--brand-primary), #db2777);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.counter button:hover::before {
+    opacity: 1;
+}
+
+.counter button:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.35);
+}
+
+.counter button:active {
+    transform: translateY(0) scale(0.95);
+}
+
+.counter button span {
+    position: relative;
+    z-index: 1;
+}
+
+.counter strong {
+    min-width: 70px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-head);
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+    border-radius: 12px;
+    border: 2px solid rgba(236, 72, 153, 0.1);
+    box-shadow: inset 0 2px 4px rgba(236, 72, 153, 0.05);
+}
+
+/* Delete Button - Ultra Modern Icon Button */
+.task-delete,
+.lesson-card .task-delete,
+.note-card .task-delete {
+    width: 32px;
+    height: 32px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 2px solid rgba(239, 68, 68, 0.15);
+    border-radius: 10px;
+    color: #ef4444;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.task-delete:hover,
+.lesson-card .task-delete:hover,
+.note-card .task-delete:hover {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+}
+
+.task-delete:active,
+.lesson-card .task-delete:active,
+.note-card .task-delete:active {
+    transform: rotate(90deg) scale(0.95);
+}
+
+
 input,
 textarea,
 select {
@@ -852,6 +1035,27 @@ textarea:focus {
     border-color: var(--brand-primary);
     background: white;
     box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
+}
+
+/* Schedule Day Input - Auto Resize */
+.day-input {
+    width: 100%;
+    min-height: 40px;
+    padding: 14px;
+    border: 2px solid var(--glass-border);
+    border-radius: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--text-head);
+    resize: none;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.day-input:focus {
+    outline: none;
+    border-color: var(--brand-primary);
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.1);
 }
 
 .task-form-grid {
@@ -1151,6 +1355,115 @@ input:checked+.toggle-switch:before {
     font-weight: 700;
     cursor: pointer;
     margin-bottom: 15px;
+}
+
+/* Note Card Platinum */
+.note-card {
+    background: white;
+    border-radius: 24px;
+    padding: 25px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: var(--transition-smooth);
+    position: relative;
+    border-left: 6px solid transparent;
+    margin-bottom: 15px;
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+}
+
+.note-emerald {
+    border-left-color: var(--brand-accent);
+}
+
+.note-pink {
+    border-left-color: var(--brand-primary);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.note-header h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    color: var(--text-head);
+    flex: 1;
+    padding-right: 45px;
+}
+
+.note-card .task-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Today Focus Widget Styler */
+.today-focus-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: white;
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.today-task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.today-task-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.today-task-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.02);
+}
+
+.today-task-item.completed {
+    background: rgba(255, 255, 255, 0.05);
+    opacity: 0.8;
+}
+
+.today-task-item.completed .task-text {
+    text-decoration: line-through;
+}
+
+.today-task-item .task-checkbox {
+    width: 22px;
+    height: 22px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.today-task-item.completed .task-checkbox {
+    background: white;
+    border-color: white;
+    color: var(--brand-primary);
 }
 
 

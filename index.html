@@ -33,35 +33,28 @@
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
             <div class="sidebar-logo">
-                <h2>Enes 💖 Eylül</h2>
+                <h2>Ders <span>Takip</span></h2>
             </div>
             <nav class="sidebar-nav">
                 <button class="nav-item active" data-section="home">
-                    <span class="nav-icon">✨</span>
                     <span>Anasayfa</span>
                 </button>
                 <button class="nav-item" data-section="devamsizlik">
-                    <span class="nav-icon">📊</span>
                     <span>Devamsızlık</span>
                 </button>
                 <button class="nav-item" data-section="notlar">
-                    <span class="nav-icon">📓</span>
                     <span>Notlarım</span>
                 </button>
                 <button class="nav-item" data-section="dersprogrami">
-                    <span class="nav-icon">📅</span>
                     <span>Ders Programı</span>
                 </button>
                 <button class="nav-item" data-section="haftalikplan">
-                    <span class="nav-icon">📋</span>
                     <span>Haftalık Plan</span>
                 </button>
                 <button class="nav-item" data-section="profil">
-                    <span class="nav-icon">💎</span>
                     <span>Profilim</span>
                 </button>
                 <button class="nav-item" data-section="copkovasi">
-                    <span class="nav-icon">🗑️</span>
                     <span>Çöp Kovası</span>
                 </button>
             </nav>
@@ -169,7 +162,7 @@
                         <div class="card-header" style="text-align:center; margin-bottom: 25px;">
                             <h2
                                 style="font-family:'Outfit', sans-serif; color:var(--text-head); font-size: 1.8rem; margin-bottom: 10px">
-                                📅 Haftalık Ders Programım</h2>
+                                Haftalık Ders Programım</h2>
                             <p style="color:var(--text-dim); font-size: 0.95rem">Derslerini günlere göre aşağıya
                                 yazabilirsin.</p>
                         </div>
@@ -177,30 +170,32 @@
                         <div class="schedule-grid" id="scheduleTable">
                             <div class="schedule-day">
                                 <div class="day-header">Pazartesi</div>
-                                <textarea class="day-input" data-day="pazartesi"
+                                <textarea class="day-input" data-day="pazartesi" rows="1"
                                     placeholder="09:00 - Matematik..."></textarea>
                             </div>
                             <div class="schedule-day">
                                 <div class="day-header">Salı</div>
-                                <textarea class="day-input" data-day="sali" placeholder="Dersleri girin..."></textarea>
+                                <textarea class="day-input" data-day="sali" rows="1"
+                                    placeholder="Dersleri girin..."></textarea>
                             </div>
                             <div class="schedule-day">
                                 <div class="day-header">Çarşamba</div>
-                                <textarea class="day-input" data-day="carsamba"
+                                <textarea class="day-input" data-day="carsamba" rows="1"
                                     placeholder="Dersleri girin..."></textarea>
                             </div>
                             <div class="schedule-day">
                                 <div class="day-header">Perşembe</div>
-                                <textarea class="day-input" data-day="persembe"
+                                <textarea class="day-input" data-day="persembe" rows="1"
                                     placeholder="Dersleri girin..."></textarea>
                             </div>
                             <div class="schedule-day">
                                 <div class="day-header">Cuma</div>
-                                <textarea class="day-input" data-day="cuma" placeholder="Dersleri girin..."></textarea>
+                                <textarea class="day-input" data-day="cuma" rows="1"
+                                    placeholder="Dersleri girin..."></textarea>
                             </div>
                         </div>
                         <button class="add-btn" id="saveScheduleBtn"
-                            style="margin-top:25px; width:100%; justify-content:center; padding:18px; font-size:1.1rem">💾
+                            style="margin-top:25px; width:100%; justify-content:center; padding:18px; font-size:1.1rem">
                             Programı Kaydet</button>
                     </div>
                 </section>
@@ -211,7 +206,7 @@
                         <div class="card-header" style="text-align:center; margin-bottom: 25px;">
                             <h2
                                 style="font-family:'Outfit', sans-serif; color:var(--text-head); font-size: 1.8rem; margin-bottom: 10px">
-                                📋 Haftalık Plan & Görevler</h2>
+                                Haftalık Plan & Görevler</h2>
                             <p style="color:var(--text-dim); font-size: 0.95rem">Günlük görevlerini ekle ve
                                 kontrol et.</p>
                         </div>
@@ -235,7 +230,7 @@
                                         <option value="pazar">Pazar</option>
                                     </select>
                                 </div>
-                                <button class="add-btn" id="addTaskBtn">➕ Görev Ekle</button>
+                                <button class="add-btn" id="addTaskBtn">+ Görev Ekle</button>
                             </div>
                         </div>
 
