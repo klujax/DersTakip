@@ -128,12 +128,6 @@ function renderHomeSchedule() {
     const container = document.getElementById('homeScheduleView');
     if (!container) return;
 
-    // If there's an uploaded image, show it
-    if (scheduleImage) {
-        container.innerHTML = `<img src="${scheduleImage}" alt="Ders Programı">`;
-        return;
-    }
-
     // Otherwise show manual schedule if exists
     const days = ['pazartesi', 'sali', 'carsamba', 'persembe', 'cuma'];
     const dayNames = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'];
@@ -526,44 +520,6 @@ function saveData() {
     localStorage.setItem('weeklyPlan', JSON.stringify(weeklyPlan));
 }
 
-// Schedule Image Upload
-document.getElementById('scheduleFile')?.addEventListener('change', function (e) {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            scheduleImage = event.target.result;
-            localStorage.setItem('scheduleImage', scheduleImage);
-            renderSchedulePreview();
-            updateDashboard();
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-function renderSchedulePreview() {
-    const preview = document.getElementById('schedulePreview');
-    if (!preview) return;
-
-    if (scheduleImage) {
-        preview.innerHTML = `
-            <div style="position:relative; display:inline-block">
-                <img src="${scheduleImage}" alt="Ders Programı">
-                <button onclick="deleteScheduleImage()" style="position:absolute; top:10px; right:10px; background:var(--accent-red); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer">🗑️ Sil</button>
-            </div>
-        `;
-    } else {
-        preview.innerHTML = '';
-    }
-}
-
-window.deleteScheduleImage = () => {
-    scheduleImage = null;
-    localStorage.removeItem('scheduleImage');
-    renderSchedulePreview();
-    updateDashboard();
-};
-
 // Save Manual Schedule
 document.getElementById('saveScheduleBtn')?.addEventListener('click', () => {
     document.querySelectorAll('.day-input').forEach(input => {
@@ -581,7 +537,6 @@ function loadSchedule() {
             input.value = schedule[input.dataset.day];
         }
     });
-    renderSchedulePreview();
 }
 
 // Save Weekly Plan

@@ -122,26 +122,21 @@
 
                         <!-- Right Column: Summary & Activity -->
                         <div class="dashboard-summ-grid">
-                            <div class="dashboard-card">
+                            <div class="dashboard-card status-card">
                                 <h3>📊 Son Durum</h3>
-                                <div id="quickSummary" class="summary-list"
-                                    style="display:flex; flex-direction:column; gap:12px">
-                                    <!-- Özet bilgiler -->
+                                <div id="quickSummary" class="summary-list">
+                                    <!-- Özet bilgiler JavaScript ile gelecek -->
                                 </div>
                             </div>
                         </div>
 
                         <!-- Full Width Schedule View -->
                         <div class="home-schedule-card">
-                            <div
-                                style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px">
-                                <h3
-                                    style="font-family:'Outfit', sans-serif; font-size:1.3rem; font-weight:800; color:var(--text-head)">
-                                    📅 Ders Programım</h3>
-                                <div style="font-size:0.85rem; color:var(--text-dim); font-weight:600">Bu Haftalık Akış
-                                </div>
+                            <div class="card-header-row">
+                                <h3>📅 Haftalık Ders Programın</h3>
+                                <button class="secondary-btn" onclick="navigateTo('dersprogrami')">Düzenle</button>
                             </div>
-                            <div id="homeScheduleView" class="home-schedule-grid">
+                            <div id="homeScheduleView">
                                 <!-- Ders programı buraya yüklenecek -->
                             </div>
                         </div>
@@ -174,23 +169,14 @@
                         <h2>📅 Ders Programı</h2>
                     </div>
 
-                    <!-- Fotoğraf Yükleme -->
-                    <div class="schedule-upload-area">
-                        <div class="upload-box" id="uploadBox">
-                            <input type="file" id="scheduleFile" accept="image/*,.pdf" style="display:none">
-                            <div class="upload-content" onclick="document.getElementById('scheduleFile').click()">
-                                <span style="font-size:3.5rem; display:block; margin-bottom:15px">📸</span>
-                                <h3 style="color:var(--brand-primary); margin-bottom:10px">Program Fotoğrafı Yükle</h3>
-                                <p style="color:var(--text-dim)">Veya manuel giriş yapmak için aşağı kaydırın</p>
-                            </div>
-                        </div>
-                        <div id="schedulePreview" class="schedule-preview"></div>
-                    </div>
-
-                    <!-- Manuel Çetele -->
+                    <!-- Manuel Ders Programı Girişi -->
                     <div class="manual-schedule">
-                        <h3 style="margin: 30px 0 20px; font-family:'Outfit', sans-serif; color:var(--text-head)">📝
-                            Veya Manuel Giriş</h3>
+                        <div class="card-header" style="margin-bottom: 25px">
+                            <h3 style="font-family:'Outfit', sans-serif; color:var(--text-head); font-size: 1.5rem">📝
+                                Haftalık Ders Programın</h3>
+                            <p style="color:var(--text-dim); font-size: 0.9rem">Derslerini saatleriyle birlikte aşağıya
+                                yazabilirsin</p>
+                        </div>
                         <div class="schedule-grid" id="scheduleTable">
                             <div class="schedule-day">
                                 <div class="day-header">Pazartesi</div>
