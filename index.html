@@ -130,14 +130,14 @@
                             </div>
                         </div>
 
-                        <!-- Full Width Schedule View -->
-                        <div class="home-schedule-card">
-                            <div class="card-header-row">
-                                <h3>📅 Haftalık Ders Programın</h3>
-                                <button class="secondary-btn" onclick="navigateTo('dersprogrami')">Düzenle</button>
+                        <!-- Ders Programı Widget -->
+                        <div class="widget-card home-schedule-widget">
+                            <div class="widget-header">
+                                <h3>📅 Ders Programı</h3>
+                                <button class="icon-btn" onclick="navigateTo('dersprogrami')">✏️</button>
                             </div>
-                            <div id="homeScheduleView">
-                                <!-- Ders programı buraya yüklenecek -->
+                            <div id="homeScheduleView" class="widget-content">
+                                <!-- Program JS ile buraya gelecek -->
                             </div>
                         </div>
                     </div>
@@ -165,23 +165,20 @@
 
                 <!-- Section: Ders Programı -->
                 <section id="dersprogrami-section" class="app-section">
-                    <div class="section-controls">
-                        <h2>📅 Ders Programı</h2>
-                    </div>
-
-                    <!-- Manuel Ders Programı Girişi -->
-                    <div class="manual-schedule">
-                        <div class="card-header" style="margin-bottom: 25px">
-                            <h3 style="font-family:'Outfit', sans-serif; color:var(--text-head); font-size: 1.5rem">📝
-                                Haftalık Ders Programın</h3>
-                            <p style="color:var(--text-dim); font-size: 0.9rem">Derslerini saatleriyle birlikte aşağıya
-                                yazabilirsin</p>
+                    <div class="manual-schedule-container card-panel">
+                        <div class="card-header" style="text-align:center; margin-bottom: 25px;">
+                            <h2
+                                style="font-family:'Outfit', sans-serif; color:var(--text-head); font-size: 1.8rem; margin-bottom: 10px">
+                                📅 Haftalık Ders Programım</h2>
+                            <p style="color:var(--text-dim); font-size: 0.95rem">Derslerini günlere göre aşağıya
+                                yazabilirsin.</p>
                         </div>
+
                         <div class="schedule-grid" id="scheduleTable">
                             <div class="schedule-day">
                                 <div class="day-header">Pazartesi</div>
                                 <textarea class="day-input" data-day="pazartesi"
-                                    placeholder="09:00 - Matematik&#10;10:00 - Fizik..."></textarea>
+                                    placeholder="09:00 - Matematik..."></textarea>
                             </div>
                             <div class="schedule-day">
                                 <div class="day-header">Salı</div>
@@ -203,51 +200,53 @@
                             </div>
                         </div>
                         <button class="add-btn" id="saveScheduleBtn"
-                            style="margin-top:20px; background:var(--brand-accent)">💾 Programı Kaydet</button>
+                            style="margin-top:25px; width:100%; justify-content:center; padding:18px; font-size:1.1rem">💾
+                            Programı Kaydet</button>
                     </div>
                 </section>
 
                 <!-- Section: Haftalık Plan -->
                 <section id="haftalikplan-section" class="app-section">
-                    <div class="section-controls">
-                        <h2>📋 Haftalık Plan & Görevler</h2>
-                    </div>
-                    <p style="margin-bottom:20px; color:var(--text-muted)">Her gün için görev ekle, tamamladıkça tik at!
-                    </p>
+                    <div class="weekly-plan-container card-panel">
+                        <div class="card-header" style="text-align:center; margin-bottom: 25px;">
+                            <h2
+                                style="font-family:'Outfit', sans-serif; color:var(--text-head); font-size: 1.8rem; margin-bottom: 10px">
+                                📋 Haftalık Plan & Görevler</h2>
+                            <p style="color:var(--text-dim); font-size: 0.95rem">Günlük görevlerini ekle ve
+                                kontrol et.</p>
+                        </div>
 
-                    <!-- Görev Ekleme -->
-                    <div class="task-add-form" style="margin-bottom:30px">
-                        <div class="profile-details-grid"
-                            style="grid-template-columns: 2fr 1fr auto; gap: 15px; align-items: flex-end;">
-                            <div>
-                                <label
-                                    style="display:block; margin-bottom:8px; font-weight:700; font-family:'Outfit',sans-serif; color:var(--text-head)">Görev
-                                    Adı</label>
-                                <input type="text" id="newTaskText" placeholder="Örn: Analiz dersine çalış..."
-                                    style="margin-bottom:0">
+                        <!-- Görev Ekleme -->
+                        <div class="task-add-form" style="margin-bottom:30px">
+                            <div class="task-form-grid">
+                                <div class="form-group">
+                                    <label>Görev Adı</label>
+                                    <input type="text" id="newTaskText" placeholder="Örn: Analiz dersine çalış...">
+                                </div>
+                                <div class="form-group">
+                                    <label>Gün</label>
+                                    <select id="newTaskDay">
+                                        <option value="pazartesi">Pazartesi</option>
+                                        <option value="sali">Salı</option>
+                                        <option value="carsamba">Çarşamba</option>
+                                        <option value="persembe">Perşembe</option>
+                                        <option value="cuma">Cuma</option>
+                                        <option value="cumartesi">Cumartesi</option>
+                                        <option value="pazar">Pazar</option>
+                                    </select>
+                                </div>
+                                <button class="add-btn" id="addTaskBtn">➕ Görev Ekle</button>
                             </div>
-                            <div>
-                                <label
-                                    style="display:block; margin-bottom:8px; font-weight:700; font-family:'Outfit',sans-serif; color:var(--text-head)">Gün</label>
-                                <select id="newTaskDay" style="margin-bottom:0">
-                                    <option value="pazartesi">Pazartesi</option>
-                                    <option value="sali">Salı</option>
-                                    <option value="carsamba">Çarşamba</option>
-                                    <option value="persembe">Perşembe</option>
-                                    <option value="cuma">Cuma</option>
-                                    <option value="cumartesi">Cumartesi</option>
-                                    <option value="pazar">Pazar</option>
-                                </select>
-                            </div>
-                            <button class="add-btn" id="addTaskBtn" style="padding:16px 30px">➕ Görev Ekle</button>
+                        </div>
+
+                        <!-- Günlük Görev Listesi -->
+                        <div class="weekly-tasks-grid" id="weeklyTasksGrid">
+                            <!-- Görevler JavaScript ile doldurulacak -->
                         </div>
                     </div>
-
-                    <!-- Günlük Görev Listesi -->
-                    <div class="weekly-tasks-grid" id="weeklyTasksGrid">
-                        <!-- Görevler JavaScript ile doldurulacak -->
-                    </div>
                 </section>
+
+                <!-- Section: Profil -->
                 <section id="profil-section" class="app-section">
                     <div class="profile-container">
                         <!-- Profile Header Card -->
@@ -314,7 +313,8 @@
                                 <div class="info-row"><span>Toplam Devamsızlık:</span> <strong id="p-absence">0
                                         Saat</strong></div>
                                 <div class="info-row"><span>Kritik Ders:</span> <strong id="p-critical">0</strong></div>
-                                <div class="info-row"><span>Kayıtlı Not:</span> <strong id="p-notes">0</strong></div>
+                                <div class="info-row"><span>Kayıtlı Not:</span> <strong id="p-notes">0</strong>
+                                </div>
                                 <div class="info-row" style="margin-top:20px"><span>Durum:</span> <span
                                         class="status-badge safe">Aktif Öğrenci</span></div>
                             </div>
@@ -324,15 +324,17 @@
 
                 <!-- Section: Trash -->
                 <section id="copkovasi-section" class="app-section">
-                    <div class="notes-header"
-                        style="margin-bottom:30px; display:flex; justify-content:space-between; align-items:center;">
-                        <h2>🗑️ Çöp Kovası</h2>
-                        <button class="add-btn" id="emptyTrashBtn" style="background:var(--brand-primary)">
-                            🗑️ Çöpü Temizle
-                        </button>
-                    </div>
-                    <div class="trash-grid" id="trashGrid">
-                        <!-- Silinenler buraya -->
+                    <div class="trash-container card-panel">
+                        <div class="card-header-row">
+                            <h2>🗑️ Çöp Kovası</h2>
+                            <button class="submit-btn" id="emptyTrashBtn"
+                                style="width:auto; margin-top:0; padding:12px 25px; background:var(--brand-primary)">
+                                🗑️ Çöpü Temizle
+                            </button>
+                        </div>
+                        <div class="trash-grid" id="trashGrid">
+                            <!-- Silinenler buraya -->
+                        </div>
                     </div>
                 </section>
             </div>

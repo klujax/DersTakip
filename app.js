@@ -1,3 +1,15 @@
+// Global Constants
+const dayKeys = ['pazartesi', 'sali', 'carsamba', 'persembe', 'cuma', 'cumartesi', 'pazar'];
+const dayNameMap = {
+    'pazartesi': 'Pazartesi',
+    'sali': 'Salı',
+    'carsamba': 'Çarşamba',
+    'persembe': 'Perşembe',
+    'cuma': 'Cuma',
+    'cumartesi': 'Cumartesi',
+    'pazar': 'Pazar'
+};
+
 // Data Management
 let lessons = JSON.parse(localStorage.getItem('lessons')) || [];
 let notes = JSON.parse(localStorage.getItem('notes')) || [];
@@ -7,6 +19,11 @@ let weeklyPlan = JSON.parse(localStorage.getItem('weeklyPlan')) || {};
 let scheduleImage = localStorage.getItem('scheduleImage') || null;
 let tasks = JSON.parse(localStorage.getItem('tasks')) || {};
 let notebooks = JSON.parse(localStorage.getItem('notebooks')) || [];
+
+// Ensure tasks object has all days
+dayKeys.forEach(day => {
+    if (!tasks[day]) tasks[day] = [];
+});
 
 // DOM Elements - Navigation
 const navItems = document.querySelectorAll('.nav-item');
@@ -628,14 +645,14 @@ function renderWeeklyTasks() {
     const container = document.getElementById('weeklyTasksGrid');
     if (!container) return;
 
-    container.innerHTML = days.map(day => {
+    container.innerHTML = dayKeys.map(day => {
         const dayTasks = tasks[day] || [];
         const completedCount = dayTasks.filter(t => t.completed).length;
 
         return `
             <div class="day-task-card">
                 <div class="day-task-header">
-                    <span>📌 ${dayNames[day]}</span>
+                    <span>📌 ${dayNameMap[day]}</span>
                     <span class="task-count">${completedCount}/${dayTasks.length}</span>
                 </div>
                 <div class="day-task-list">
