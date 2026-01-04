@@ -52,8 +52,35 @@ navItems.forEach(item => {
         if (sectionId === 'home') updateDashboard();
         if (sectionId === 'profil') updateProfileStats();
         if (sectionId === 'copkovasi') renderTrash();
+
+        // Close sidebar on mobile after clicking
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
     });
 });
+
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const sidebar = document.querySelector('.sidebar');
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.add('open');
+        sidebarOverlay.classList.add('active');
+    });
+}
+
+if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('active');
+    });
+}
 
 // Update Dashboard Summary
 function updateDashboard() {

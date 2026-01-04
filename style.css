@@ -581,29 +581,253 @@ input:focus {
     background: white;
 }
 
-/* Responsive */
+/* ========== MOBİL UYUMLULUK ========== */
+
+/* Hamburger Menu Button */
+.mobile-menu-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--brand-primary), #db2777);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 8px 30px rgba(236, 72, 153, 0.4);
+}
+
+/* Tablet */
 @media (max-width: 1100px) {
     .home-grid {
         grid-template-columns: 1fr;
     }
-}
 
-@media (max-width: 800px) {
     .stats-container {
-        grid-template-columns: 1fr;
-    }
-
-    .home-schedule-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .sidebar {
-        width: 85px;
-        padding: 30px 15px;
+    .profile-header-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+    }
+}
+
+/* Mobil */
+@media (max-width: 768px) {
+    .dashboard-layout {
+        flex-direction: column;
+        padding: 0;
+        gap: 0;
     }
 
-    .sidebar-logo h2,
+    /* Sidebar Mobil */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        z-index: 1000;
+        border-radius: 0 32px 32px 0;
+        padding: 40px 24px;
+        transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        background: #fce7f3;
+        /* Kesinleşmiş arkaplan rengi */
+        box-shadow: none;
+    }
+
+    .sidebar.open {
+        left: 0;
+        box-shadow: 20px 0 60px rgba(131, 24, 67, 0.15);
+    }
+
+    /* Mobilde gizlenen logoyu ve metinleri geri getir */
+    .sidebar-logo h2 {
+        display: block !important;
+        font-size: 1.4rem;
+        margin-bottom: 30px;
+    }
+
     .nav-item span {
-        display: none;
+        display: block !important;
+    }
+
+    .sidebar-overlay {
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(131, 24, 67, 0.2);
+        backdrop-filter: blur(4px);
+        z-index: 999;
+        transition: all 0.4s ease;
+    }
+
+    .sidebar-overlay.active {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-menu-btn:active {
+        transform: scale(0.9) rotate(90deg);
+    }
+
+    /* Main Content Mobil */
+    .main-wrapper {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top-bar {
+        padding: 20px;
+        height: auto;
+        background: rgba(253, 242, 248, 0.8);
+        backdrop-filter: blur(10px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .top-bar h1 {
+        font-size: 1.2rem;
+    }
+
+    .content-area {
+        padding: 20px;
+        padding-bottom: 120px;
+    }
+
+    /* Grid Düzeltmeleri */
+    .stats-container,
+    .home-schedule-grid,
+    .lessons-grid,
+    .notes-grid,
+    .trash-grid,
+    .weekly-tasks-grid,
+    .profile-details-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px;
+    }
+
+    .stat-card {
+        padding: 20px;
+    }
+
+    .stat-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        font-size: 1.4rem;
+    }
+
+    .stat-content h3 {
+        font-size: 1.8rem;
+    }
+
+    /* Focus Card */
+    .today-focus-card {
+        padding: 25px;
+        min-height: auto;
+        border-radius: 24px;
+    }
+
+    .today-focus-card h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Cards */
+    .home-schedule-card,
+    .dashboard-card,
+    .lesson-card,
+    .note-card,
+    .detail-card {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .home-day-pill {
+        padding: 15px;
+    }
+
+    /* Profile */
+    .profile-header-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+        border-radius: 24px;
+        gap: 20px;
+    }
+
+    .profile-avatar-large {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-info-large h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Buttons */
+    .add-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Modal */
+    .modal {
+        margin: 15px;
+        padding: 30px 20px;
+        border-radius: 32px;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    /* Form */
+    input,
+    textarea,
+    select {
+        padding: 14px;
+        font-size: 16px;
+        /* iOS zoom fix */
+    }
+
+    /* Header Avatar */
+    .header-avatar {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Küçük Telefonlar */
+@media (max-width: 400px) {
+    .stat-content h3 {
+        font-size: 1.5rem;
+    }
+
+    .top-bar h1 {
+        font-size: 1rem;
+    }
+
+    .sidebar-logo h2 {
+        font-size: 1.2rem;
     }
 }
