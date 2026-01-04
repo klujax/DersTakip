@@ -641,6 +641,80 @@ textarea:focus {
     margin-bottom: 30px;
 }
 
+.close-btn {
+    background: #fdf2f8;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    color: var(--brand-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    background: var(--brand-primary);
+    color: white;
+}
+
+/* Color Picker */
+.color-picker {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.color-option {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: 0.3s;
+    position: relative;
+    display: block;
+    /* label olduğu için block yapılmalı */
+}
+
+.color-option.green {
+    background: #10b981;
+}
+
+.color-option.pink {
+    background: #ec4899;
+}
+
+/* Radio input checked olunca yanındaki label (.color-option) stillendirilir */
+input[type="radio"]:checked+.color-option {
+    box-shadow: 0 0 0 3px white, 0 0 0 6px var(--brand-primary);
+    transform: scale(1.1);
+}
+
+/* Submit Button in Modal */
+.submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--brand-accent), #059669);
+    color: white;
+    border: none;
+    border-radius: 18px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.25);
+    transition: var(--transition-smooth);
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(16, 185, 129, 0.35);
+}
+
 .modal-header h3 {
     font-family: 'Outfit', sans-serif;
     font-size: 1.5rem;
