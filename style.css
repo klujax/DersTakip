@@ -1473,18 +1473,19 @@ input:checked+.toggle-switch:before {
 .mobile-menu-btn {
     display: none;
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 30px;
+    right: 30px;
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, var(--brand-primary), #db2777);
+    background: white;
     border: none;
-    border-radius: 50%;
-    color: white;
+    border-radius: 20px;
+    color: var(--brand-primary);
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 1001;
-    box-shadow: 0 8px 30px rgba(236, 72, 153, 0.4);
+    z-index: 1100;
+    box-shadow: 0 10px 40px rgba(236, 72, 153, 0.3);
+    transition: all 0.3s ease;
 }
 
 /* Tablet */
@@ -1506,45 +1507,71 @@ input:checked+.toggle-switch:before {
 
 /* Mobil */
 @media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
     .dashboard-layout {
         flex-direction: column;
         padding: 0;
         gap: 0;
+        height: 100vh;
     }
 
-    /* Sidebar Mobil */
+    /* Sidebar Mobil - Glassmorphism Korundu */
     .sidebar {
         position: fixed;
         top: 0;
         left: -100%;
-        width: 80%;
-        max-width: 300px;
+        width: 85%;
+        max-width: 320px;
         height: 100vh;
-        z-index: 1000;
-        border-radius: 0 32px 32px 0;
-        padding: 40px 24px;
-        transition: left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        background: #fce7f3;
-        /* Kesinleşmiş arkaplan rengi */
+        z-index: 1200;
+        border-radius: 0 30px 30px 0;
+        padding: 50px 0;
+        transition: left 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        border-right: 1px solid rgba(236, 72, 153, 0.2);
         box-shadow: none;
     }
 
     .sidebar.open {
         left: 0;
-        box-shadow: 20px 0 60px rgba(131, 24, 67, 0.15);
+        box-shadow: 30px 0 80px rgba(236, 72, 153, 0.2);
     }
 
-    /* Mobilde gizlenen logoyu ve metinleri geri getir */
+    .sidebar-logo {
+        padding: 0 35px;
+        margin-bottom: 50px;
+    }
+
     .sidebar-logo h2 {
-        display: block !important;
-        font-size: 1.4rem;
-        margin-bottom: 30px;
+        font-size: 1.5rem;
     }
 
-    .nav-item span {
-        display: block !important;
+    .sidebar-logo h2 span {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
     }
 
+    .sidebar-nav {
+        padding: 0 20px;
+        gap: 8px;
+    }
+
+    .nav-item {
+        padding: 16px 22px;
+        font-size: 0.9rem;
+    }
+
+    .sidebar-footer {
+        padding: 30px;
+        font-size: 0.6rem;
+    }
+
+    /* Overlay */
     .sidebar-overlay {
         display: block;
         visibility: hidden;
@@ -1554,9 +1581,9 @@ input:checked+.toggle-switch:before {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(131, 24, 67, 0.4);
+        background: rgba(131, 24, 67, 0.3);
         backdrop-filter: blur(8px);
-        z-index: 999;
+        z-index: 1100;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -1565,29 +1592,21 @@ input:checked+.toggle-switch:before {
         opacity: 1;
     }
 
+    /* Mobile Menu Button - Modern Card Style */
     .mobile-menu-btn {
         display: flex;
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 65px;
-        height: 65px;
-        background: linear-gradient(135deg, var(--brand-primary), #db2777);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        font-size: 1.8rem;
-        box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
-        z-index: 1100;
         align-items: center;
         justify-content: center;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(236, 72, 153, 0.25);
     }
 
     .mobile-menu-btn:active {
-        transform: scale(0.85);
+        transform: scale(0.9);
     }
-
 
     /* Main Content Mobil */
     .main-wrapper {
@@ -1600,23 +1619,26 @@ input:checked+.toggle-switch:before {
     .top-bar {
         padding: 20px;
         height: auto;
-        background: rgba(253, 242, 248, 0.8);
-        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
         position: sticky;
         top: 0;
-        z-index: 10;
+        z-index: 50;
+        border-bottom: 1px solid rgba(236, 72, 153, 0.1);
     }
 
     .top-bar h1 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        font-weight: 800;
     }
 
     .content-area {
         padding: 20px;
-        padding-bottom: 120px;
+        padding-bottom: 100px;
+        overflow-y: auto;
     }
 
-    /* Grid Düzeltmeleri */
+    /* Grid Düzeltmeleri - Touch Friendly */
     .stats-container,
     .home-schedule-grid,
     .lessons-grid,
@@ -1625,108 +1647,157 @@ input:checked+.toggle-switch:before {
     .weekly-tasks-grid,
     .profile-details-grid {
         grid-template-columns: 1fr !important;
-        gap: 15px;
+        gap: 18px;
     }
 
     .stat-card {
-        padding: 20px;
+        padding: 24px;
+        border-radius: 24px;
     }
 
     .stat-icon-wrapper {
-        width: 50px;
-        height: 50px;
-        font-size: 1.4rem;
+        width: 55px;
+        height: 55px;
+        font-size: 1.5rem;
     }
 
     .stat-content h3 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     /* Focus Card */
     .today-focus-card {
-        padding: 25px;
+        padding: 28px;
         min-height: auto;
-        border-radius: 24px;
+        border-radius: 28px;
     }
 
     .today-focus-card h2 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
-    /* Cards */
+    /* Cards - Larger Touch Targets */
     .home-schedule-card,
     .dashboard-card,
     .lesson-card,
     .note-card,
     .detail-card {
-        padding: 20px;
-        border-radius: 20px;
+        padding: 24px;
+        border-radius: 24px;
+        transition: all 0.3s ease;
     }
 
     .home-day-pill {
-        padding: 15px;
+        padding: 18px;
+        border-radius: 18px;
     }
 
     /* Profile */
     .profile-header-card {
         flex-direction: column;
         text-align: center;
-        padding: 30px 20px;
-        border-radius: 24px;
-        gap: 20px;
+        padding: 35px 25px;
+        border-radius: 28px;
+        gap: 25px;
     }
 
     .profile-avatar-large {
-        width: 100px;
-        height: 100px;
+        width: 110px;
+        height: 110px;
     }
 
     .profile-info-large h2 {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
-    /* Buttons */
+    /* Buttons - Touch Friendly */
     .add-btn {
-        padding: 12px 20px;
-        font-size: 0.9rem;
+        padding: 16px 24px;
+        font-size: 1rem;
+        min-height: 50px;
+        border-radius: 18px;
     }
 
-    /* Modal */
+    .counter button {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+    }
+
+    .task-delete,
+    .lesson-card .task-delete,
+    .note-card .task-delete {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+    }
+
+    /* Modal - Full Screen on Mobile */
     .modal {
-        margin: 15px;
-        padding: 30px 20px;
-        border-radius: 32px;
-        max-height: 85vh;
+        margin: 0;
+        padding: 35px 25px;
+        border-radius: 30px 30px 0 0;
+        max-height: 90vh;
         overflow-y: auto;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 
-    /* Form */
+    .modal-overlay.active {
+        background: rgba(0, 0, 0, 0.6);
+    }
+
+    /* Form - Prevent iOS Zoom */
     input,
     textarea,
     select {
-        padding: 14px;
+        padding: 16px;
         font-size: 16px;
-        /* iOS zoom fix */
+        border-radius: 16px;
     }
 
     /* Header Avatar */
     .header-avatar {
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
+    }
+
+    /* Task Items - Larger Touch Area */
+    .task-item {
+        padding: 16px;
+        min-height: 60px;
+    }
+
+    .day-task-card {
+        border-radius: 24px;
+        padding: 20px;
     }
 }
 
 /* Küçük Telefonlar */
 @media (max-width: 400px) {
     .stat-content h3 {
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
 
     .top-bar h1 {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .sidebar-logo h2 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+    }
+
+    .mobile-menu-btn {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .content-area {
+        padding: 15px;
     }
 }
